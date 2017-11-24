@@ -1,0 +1,13 @@
+<view class='infoBox'>
+  <view class='marketBox'>
+    <text>BTC</text>
+
+    <view class='lastPrice'>
+      <text class='marketLastPrice'>{{data.last_ask}}</text>
+      <text class='financeLastPrice'>≈{{data.last_ask}}</text>
+    </view>
+    <view class='percentBox'>
+    <text class='percent'>{{data.change_percent}}</text>
+    </view>
+  </view>
+</view>

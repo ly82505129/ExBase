@@ -1,0 +1,31 @@
+
+
+
+
+.marketBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 25rpx;
+  border-top: 1px solid#ededed;
+  border-bottom: 1px solid#ededed;
+  height: 100rpx;
+  justify-content: space-between;
+}
+
+.lastPrice{
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  margin-right: -180rpx;
+}
+
+
+.percentBox{
+
+}
+
+.percent{
+  margin-right: 38rpx;
+
+}
