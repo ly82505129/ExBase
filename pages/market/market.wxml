@@ -1,13 +1,17 @@
 <view class='infoBox'>
+
+<block wx:for="{{marketInfo}}" wx:for-item="market">
   <view class='marketBox'>
-    <text>BTC</text>
+    <text>{{market.market}}</text>
 
     <view class='lastPrice'>
-      <text class='marketLastPrice'>{{data.last_ask}}</text>
-      <text class='financeLastPrice'>≈{{data.last_ask}}</text>
+      <text class='marketLastPrice'>{{market.last_price}}</text>
+      <text class='financeLastPrice'>≈{{market.last_price}}</text>
     </view>
     <view class='percentBox'>
-    <text class='percent'>{{data.change_percent}}</text>
+    <text class='percent'>{{market.change_percent}}</text>
     </view>
   </view>
+
+</block>
 </view>

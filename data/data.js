@@ -1,7 +1,7 @@
-var marketList=[{
+var marketList={
   marketBase:"poloniex",
-  market: ["BTCUSDT", "ETHUSDT"]  
-}]
+  market: ["BTCUSDT", "ETHUSDT", "OMGETH"]  
+}
 
 module.exports={
   marketList:marketList
