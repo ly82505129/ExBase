@@ -11,6 +11,9 @@ Page({
   data: {
     marketInfo: {},
     market: {},
+    listShow: [
+      {show: true },
+    ],
 
   },
 
@@ -44,7 +47,7 @@ Page({
     var mkList = marketList.getAllMarkList();
     var url = app.globalData.exbaseBaseUrl + "GetTicker";
 
-    for (var i = 0; i < marketList.getAllMarkList().market.length; i++) {
+    for (var i = 0; i < mkList.market.length; i++) {
       var params = {
         market: mkList.market[i],
         base: mkList.marketBase
@@ -62,7 +65,6 @@ Page({
   },
 
   getMarketList: function (url, params, i) {
-
     var that = this;
     wx.request({
       url: url,
@@ -82,8 +84,14 @@ Page({
 
   loadMarketData: function (res, params, i) {
     // console.log("这里打印markinfo"+marketInfo);
-    res.market = params.market;
+   
     var key = "marketInfo[" + i + "]";
+    /*1.修改res中的对象，将change_percent换成百分比并保留两位小叔，
+      2.往res中增加对象，将market交易对放入到res中
+    */
+    res.change_percent = num.toDecimal(res.change_percent * 100) + "%";
+    res.market = params.market;
+
     this.setData({
       [key]: res
     });
@@ -146,6 +154,17 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+
+  showContent: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    var key = "listShow[" + index + "].show";
+    var val = this.data.listShow[index].show;
+    console.log(val);
+    this.setData({
+      [key]: !val
+    })
 
   }
 

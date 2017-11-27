@@ -1,17 +1,23 @@
 <view class='infoBox'>
 
-<block wx:for="{{marketInfo}}" wx:for-item="market">
-  <view class='marketBox'>
-    <text>{{market.market}}</text>
+  <block wx:for="{{marketInfo}}" wx:for-item="market">
+    <view bindtap='showContent' class='baseCurrency' data-index="{{index}}">poloniex </view>
+    <view class="{{listShow[0].show ? 'marketBox' : 'hideClass'}}">
+      <text>{{market.market}}</text>
 
-    <view class='lastPrice'>
-      <text class='marketLastPrice'>{{market.last_price}}</text>
-      <text class='financeLastPrice'>≈{{market.last_price}}</text>
+      <view class='lastPrice'>
+        <text class='marketLastPrice'>{{market.last_price}}</text>
+        <text class='financeLastPrice'>≈{{market.last_price}}</text>
+      </view>
+      <view class='percentBox'>
+        <text class='percent'>{{market.change_percent}}</text>
+      </view>
     </view>
-    <view class='percentBox'>
-    <text class='percent'>{{market.change_percent}}</text>
-    </view>
-  </view>
 
 </block>
+
 </view>
+
+
+<!-- <view style="background:#eee;" bindtap="showContent"  data-index="{{index}}" >{{item.title}}</view>
+    <view style="background:#ccc;" class="{{item.show ? 'showClass' : 'hideClass'}}">{{item.content}}</view> -->
