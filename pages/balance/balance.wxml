@@ -1,2 +1,15 @@
 <!--pages/balance/balance.wxml-->
 <text>pages/balance/balance.wxml</text>
+    
+    
+    <view class="marketBox">
+      <text>{{market.market}}</text>
+
+      <view class='lastPrice'>
+        <text class='marketLastPrice'>{{market.last_price}}</text>
+        <text class='financeLastPrice'>≈{{market.last_price}}</text>
+      </view>
+      <view class='percentBox'>
+        <text class='percent'>{{market.change_percent}}</text>
+      </view>
+    </view>

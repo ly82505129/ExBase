@@ -37,6 +37,7 @@ App({
   onError: function (msg) {
 
   },
+  
   globalData: {
     exbaseBaseUrl: "http://45.77.25.254/api_v1/"
   }

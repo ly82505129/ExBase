@@ -18,5 +18,9 @@ execSetStorageSync(data) {
   wx.setStorageSync(this.storageKeyName, data);
 }
 
+getMarketBase(){
+  
+}
+
 };
 export { DB }
