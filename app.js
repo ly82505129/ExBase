@@ -1,4 +1,5 @@
 const request = require('./utils/request.js')
+// var data=require('./data/data.js')
 
 App({
   request:request,
@@ -7,14 +8,30 @@ App({
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
+    
     var storageData = wx.getStorageSync('marketList');
     if (!storageData) {
-      var dataObj = require("data/data.js")
-      wx.clearStorageSync();
-      wx.setStorageSync('marketList', dataObj.marketList);
+      
+      
+      this.getMarketBase();
+
+
     }
 
 
+  }, 
+  getMarketBase:function (){
+    var url = this.globalData.exbaseBaseUrl+"/GetExbaseInfo";
+    wx.request({
+      url: url,
+      success: function (res) {
+        var dataObj = require("data/data.js")
+        dataObj.marketList.marketBase = res.data.base;
+        wx.clearStorageSync();
+        console.log(dataObj);
+        wx.setStorageSync('marketList', dataObj.marketList);
+      }
+    })
   },
 
   /**

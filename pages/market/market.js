@@ -48,12 +48,16 @@ Page({
     var url = app.globalData.exbaseBaseUrl + "GetTicker";
 
     for (var i = 0; i < mkList.market.length; i++) {
+      for (var j = 0; j < mkList.marketBase.length;j++){
       var params = {
         market: mkList.market[i],
         base: mkList.marketBase
       }
-      var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?market=" + mkList.market[i] + "&base=" + mkList.marketBase;
-      this.getMarketList(marketUrl, params, i);
+      var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?market=" + mkList.market[i] + "&base=" + mkList.marketBase[j];
+      // var a = (i + 1) * (j + i) - 1;
+      // console.log("(i+1)*(j+i)-1" + a);
+      this.getMarketList(marketUrl, params, (i+1)*(j+i)-1);
+      }
       // app.request.requestGetApi(url, params, this, this.successFun, this.failFun)
     }
 

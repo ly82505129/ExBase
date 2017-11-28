@@ -1,6 +1,6 @@
 var marketList={
   marketBase:"poloniex",
-  market: ["BTCUSDT", "ETHUSDT", "OMGETH"]  
+  market: ["BTCUSDT", "ETHUSDT", "OMGETH"]
 }
 
 
