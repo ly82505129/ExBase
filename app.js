@@ -11,10 +11,8 @@ App({
     
     var storageData = wx.getStorageSync('marketList');
     if (!storageData) {
-      
-      
+   
       this.getMarketBase();
-
 
     }
 

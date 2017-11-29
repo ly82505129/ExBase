@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    marketInfo: {},
+    marketInfo: [],
     market: {},
     listShow: [
       {show: true },
@@ -46,6 +46,10 @@ Page({
 
     var mkList = marketList.getAllMarkList();
     var url = app.globalData.exbaseBaseUrl + "GetTicker";
+    this.setData({
+      marketBase: mkList.marketBase
+    })
+       
 
     for (var i = 0; i < mkList.market.length; i++) {
       for (var j = 0; j < mkList.marketBase.length;j++){
@@ -56,7 +60,7 @@ Page({
       var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?market=" + mkList.market[i] + "&base=" + mkList.marketBase[j];
       // var a = (i + 1) * (j + i) - 1;
       // console.log("(i+1)*(j+i)-1" + a);
-      this.getMarketList(marketUrl, params, (i+1)*(j+i)-1);
+      this.getMarketList(marketUrl, params, i);
       }
       // app.request.requestGetApi(url, params, this, this.successFun, this.failFun)
     }
@@ -88,7 +92,7 @@ Page({
 
   loadMarketData: function (res, params, i) {
     // console.log("这里打印markinfo"+marketInfo);
-   
+    console.log('这里打印marketinfo的长度'+this.data.marketInfo.length)
     var key = "marketInfo[" + i + "]";
     /*1.修改res中的对象，将change_percent换成百分比并保留两位小叔，
       2.往res中增加对象，将market交易对放入到res中

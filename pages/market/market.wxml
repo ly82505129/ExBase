@@ -1,5 +1,23 @@
 <view class='infoBox'>
 
+    <view class="header">
+        <scroll-view class="mk_container" scroll-x="true">
+            <block wx:for="{{marketBase}}" wx:key="marketBase_id" wx:if="{{ item.selected }}">
+                <view 
+                    class="mk_item {{ currentTab==item.marketBase_id ? 'active':'' }}" 
+                    bindtap="changeCategory" 
+                    data-id="{{ item.mk_id }}"
+                >
+                    {{ marketBase }}
+                </view>
+            </block>
+        </scroll-view>
+        <image bindtap="manageTabs" class="sv-manager" src="/image/icon-manage.png"></image>
+    </view>
+
+
+
+
   <block wx:for="{{marketInfo}}" wx:for-item="market">
     <view bindtap='showContent' class='baseCurrency' data-index="{{index}}">poloniex </view>
     <view class="{{listShow[0].show ? 'marketBox' : 'hideClass'}}">
