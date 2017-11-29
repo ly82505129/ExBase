@@ -29,10 +29,13 @@
 }
 
 .percentBox{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
   background-color: #339900;
   height: 60rpx;
   margin-right:38rpx; 
-  width: 120rpx;
+  width: 140rpx;
   text-align: right;
 }
 

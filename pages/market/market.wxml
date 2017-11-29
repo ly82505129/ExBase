@@ -17,9 +17,11 @@
 
 
 
-
+  <block wx:for='{{marketBase}}' >
+  <view bindtap='showContent' class='baseCurrency' data-index="{{index}}">{{marketBase[0]}} </view>
+  </block>
   <block wx:for="{{marketInfo}}" wx:for-item="market">
-    <view bindtap='showContent' class='baseCurrency' data-index="{{index}}">poloniex </view>
+
     <view class="{{listShow[0].show ? 'marketBox' : 'hideClass'}}">
       <text>{{market.market}}</text>
 

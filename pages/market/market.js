@@ -12,8 +12,9 @@ Page({
     marketInfo: [],
     market: {},
     listShow: [
-      {show: true },
+      { show: true },
     ],
+    // marketBase:[]
 
   },
 
@@ -45,44 +46,38 @@ Page({
   onLoad: function (options) {
 
     var mkList = marketList.getAllMarkList();
-    var url = app.globalData.exbaseBaseUrl + "GetTicker";
     this.setData({
       marketBase: mkList.marketBase
     })
-       
 
-    for (var i = 0; i < mkList.market.length; i++) {
-      for (var j = 0; j < mkList.marketBase.length;j++){
-      var params = {
-        market: mkList.market[i],
-        base: mkList.marketBase
-      }
-      var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?market=" + mkList.market[i] + "&base=" + mkList.marketBase[j];
-      // var a = (i + 1) * (j + i) - 1;
-      // console.log("(i+1)*(j+i)-1" + a);
-      this.getMarketList(marketUrl, params, i);
-      }
-      // app.request.requestGetApi(url, params, this, this.successFun, this.failFun)
-    }
 
-    this.setData({
-      market: marketList.getAllMarkList().market
-    })
+    // for (var i = 0; i < mkList.market.length; i++) {
+    //   for (var j = 0; j < mkList.marketBase.length;j++){
+    // var params = {
+    //   market: mkList.market[i],
+    //   base: mkList.marketBase
+    // }
+    var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?&base=" + mkList.marketBase[0];
+    this.getMarket(marketUrl);
+    //   }
+    //    app.request.requestGetApi(url, params, this, this.successFun, this.failFun)
+    // }
+
+    // this.setData({
+    //   market: marketList.getAllMarkList().market
+    // })
 
 
   },
 
-  getMarketList: function (url, params, i) {
+  getMarket: function (url) {
     var that = this;
     wx.request({
       url: url,
       method: 'GET',
-      header: {
-        "content-type": "json"
-      }
-      ,
+      header: 'json',
       success: function (res) {
-        that.loadMarketData(res.data, params, i);
+        that.loadMarketData(res.data);
       },
       fail: function (error) {
         console.log(error);
@@ -90,18 +85,26 @@ Page({
     })
   },
 
-  loadMarketData: function (res, params, i) {
+  loadMarketData: function (res) {
     // console.log("这里打印markinfo"+marketInfo);
-    console.log('这里打印marketinfo的长度'+this.data.marketInfo.length)
-    var key = "marketInfo[" + i + "]";
+    console.log('这里打印marketinfo的长度' + this.data.marketInfo.length)
+    // var key = "marketInfo[" + i + "]";
     /*1.修改res中的对象，将change_percent换成百分比并保留两位小叔，
       2.往res中增加对象，将market交易对放入到res中
     */
-    res.change_percent = num.toDecimal(res.change_percent * 100) + "%";
-    res.market = params.market;
+    // var  market=[res];
+    // console.log(market.length)
+    for (var i in res) {
+      console.log(res[i].change_percent)
+      res[i].change_percent = num.toDecimal(res[i].change_percent) + "%";
+      res[i].market=i;
+      console.log(res[i].change_percent)
+    }
+    // res.change_percent = num.toDecimal(res.change_percent * 100) + "%";
+    // res.market = params.market;
 
     this.setData({
-      [key]: res
+      marketInfo: res
     });
     // console.log(this.data)
     // return res;
