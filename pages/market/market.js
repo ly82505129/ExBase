@@ -14,6 +14,8 @@ Page({
     listShow: [
       { show: true },
     ],
+    marketBaseTab:0
+
     // marketBase:[]
 
   },
@@ -46,28 +48,35 @@ Page({
   onLoad: function (options) {
 
     var mkList = marketList.getAllMarkList();
+    // for (var i = 0; i < mkList.marketBase.length;i++){
+    //   mkList.marketBase[i].selected=true
+    //   console.log('这里打印marketbase' + kList.marketBase[i])
+    // }
+
+    mkList.marketBase.forEach(
+      function (i, b) {
+
+        var mlist = {};
+        mlist.marketBase = i;
+        mlist.selected = true;
+        mlist.mk_id=b;
+        mkList.marketBase[b] = mlist;
+      }
+    )
+
+
     this.setData({
-      marketBase: mkList.marketBase
+      marketBase: mkList.marketBase,
     })
-
-
-    // for (var i = 0; i < mkList.market.length; i++) {
-    //   for (var j = 0; j < mkList.marketBase.length;j++){
     // var params = {
     //   market: mkList.market[i],
     //   base: mkList.marketBase
     // }
-    var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?&base=" + mkList.marketBase[0];
+    var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?&base=" + mkList.marketBase[0].marketBase;
     this.getMarket(marketUrl);
-    //   }
-    //    app.request.requestGetApi(url, params, this, this.successFun, this.failFun)
-    // }
-
     // this.setData({
     //   market: marketList.getAllMarkList().market
     // })
-
-
   },
 
   getMarket: function (url) {
@@ -95,10 +104,8 @@ Page({
     // var  market=[res];
     // console.log(market.length)
     for (var i in res) {
-      console.log(res[i].change_percent)
-      res[i].change_percent = num.toDecimal(res[i].change_percent) + "%";
-      res[i].market=i;
-      console.log(res[i].change_percent)
+      res[i].change_percent = num.toDecimal(res[i].change_percent);
+      res[i].market = i;
     }
     // res.change_percent = num.toDecimal(res.change_percent * 100) + "%";
     // res.market = params.market;
@@ -177,6 +184,17 @@ Page({
       [key]: !val
     })
 
+  },    // 切换当前选择的分类
+  changeMarketBase(event) {
+    var chid = event.target.dataset.id
+    // 获取ccurrentTab.没有切换分类
+    if (this.data.marketBaseTab === chid) {
+      return false
+    }
+    this.setData({ marketBaseTab: chid })
+    console.log(this.data.marketBase[chid])
+    var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?&base=" + this.data.marketBase[chid].marketBase;
+    this.getMarket(marketUrl);
   }
 
 })

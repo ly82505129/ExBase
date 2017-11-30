@@ -39,6 +39,13 @@
   text-align: right;
 }
 
+.up{
+
+}
+.down{
+  background-color: #E00000;
+}
+
 .percent{
   color: white;
   font-size: 15px;
@@ -47,4 +54,36 @@
 
 .hideClass{
   display:none;
+}
+
+
+/* header 部分导航 */
+.header{
+    width: 100%;
+    background-color: #fff;
+    font-size: 30rpx;
+    display: flex;
+    align-items: center;
+    height: 64rpx;
+    position: relative;
+    border-bottom: 1px solid#ededed;
+}
+.mk_container{
+    width: 18rem;
+    height: 64rpx;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.mk_item{
+    padding: 14rpx;
+    display: inline-block;
+}
+.mkBase-manager{
+    padding-left:20rpx;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: center;
 }

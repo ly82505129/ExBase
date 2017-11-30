@@ -13,7 +13,7 @@
     },
     {
       "pagePath": "pages/balance/balance",
-      "text": "差额",
+      "text": "差价行情",
       "iconPath": "images/icon/wx_app_tab2.png",
       "selectedIconPath": "images/icon/wx_app_tab2.png"
     }
