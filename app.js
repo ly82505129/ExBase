@@ -1,25 +1,28 @@
+import { DB } from "./db/DB.js";
 const request = require('./utils/request.js')
+const utils = require('./utils/utils.js')
+var marketList = new DB();
 // var data=require('./data/data.js')
 
 App({
-  request:request,
+  request: request,
 
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
-    
+
     var storageData = wx.getStorageSync('marketList');
     if (!storageData) {
-   
+
       this.getMarketBase();
 
     }
 
 
-  }, 
-  getMarketBase:function (){
-    var url = this.globalData.exbaseBaseUrl+"/GetExbaseInfo";
+  },
+  getMarketBase: function () {
+    var url = this.globalData.exbaseBaseUrl + "/GetExbaseInfo";
     wx.request({
       url: url,
       success: function (res) {
@@ -52,12 +55,12 @@ App({
   onError: function (msg) {
 
   },
-  
+
   globalData: {
     exbaseBaseUrl: "http://45.77.25.254/api_v1/"
   }
 })
 
-  
+
 
 

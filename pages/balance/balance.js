@@ -1,4 +1,6 @@
 // pages/balance/balance.js
+const app=getApp();
+
 Page({
 
   /**
@@ -12,8 +14,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
+    // var mkList=app.marketList.getAllMarkList()
+
+    var url = app.globalData.exbaseBaseUrl + "GetTicker?base=" + mkList.marketBase[0].marketBase +"&market=MCOETH";
+
+      app.utils.get(url,data).then(res=>{
+
+      })
+
+      
   },
+
+
+  
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
