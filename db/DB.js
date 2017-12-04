@@ -19,7 +19,7 @@ execSetStorageSync(data) {
 }
 
 getMarketBase(){
-  
+
 }
 
 };
