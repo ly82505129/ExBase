@@ -1,6 +1,7 @@
 // pages/balance/balance.js
 var app = getApp();
 var mkList = app.marketList.getAllMarkList()
+const num = require('../../utils/num.js');
 var diff = [];
 Page({
 
@@ -8,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    diffInfo: [],
   },
 
   /**
@@ -38,9 +39,17 @@ Page({
           console.log(diff)
           console.log(Math.max.apply(Math, diff))
           console.log(Math.min.apply(Math, diff))
-          var diff_price = Math.max.apply(Math, diff) - Math.min.apply(Math, diff)
+          var diff_price = parseFloat((Math.max.apply(Math, diff) - Math.min.apply(Math, diff)).toFixed(8))
+          console.log(parseFloat(diff_price.toFixed(8)))
+          var dif_percent = num.toDecimal((diff_price / Math.min.apply(Math, diff)) * 100)
+          var temp ={
+            last_price: diff_price,
+            change_percent: dif_percent,
+            market:'MCO'
+          }
+          console.log(dif_percent)
           this.setData({
-            
+            'diffInfo[0]':temp
           })
 
         }

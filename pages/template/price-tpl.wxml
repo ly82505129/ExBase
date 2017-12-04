@@ -1,7 +1,7 @@
 <template name="marketBox">
 
     <view class="marketBox">
-      <text>{{market}}</text>
+      <text class='marketTitle'>{{market}}</text>
 
       <view class='lastPrice'>
         <text class='marketLastPrice'>{{last_price}}</text>
