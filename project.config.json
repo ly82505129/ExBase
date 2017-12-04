@@ -22,7 +22,20 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "差价行情",
+					"pathName": "pages/balance/balance",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "差价行情",
+					"pathName": "pages/balance/balance",
+					"query": ""
+				}
+			]
 		}
 	}
 }

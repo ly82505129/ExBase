@@ -72,7 +72,7 @@ Page({
     //   market: mkList.market[i],
     //   base: mkList.marketBase
     // }
-    var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?&base=" + mkList.marketBase[0].marketBase;
+    var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?base=" + mkList.marketBase[0].marketBase;
     this.getMarket(marketUrl);
     // this.setData({
     //   market: marketList.getAllMarkList().market
