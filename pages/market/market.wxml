@@ -1,10 +1,11 @@
+<import src="../template/price-tpl.wxml" />
 <view class='infoBox'>
 
   <view class="header">
     <scroll-view class="mk_container" scroll-x="true">
       <block wx:for="{{marketBase}}" wx:key="marketBase_id" wx:if="{{ item.selected }}">
         <view class="mk_item" bindtap="changeMarketBase" data-id="{{ item.mk_id }}">
-         <!-- {{ currentTab==item.marketBase_id ? 'active':'' }} -->
+          <!-- {{ currentTab==item.marketBase_id ? 'active':'' }} -->
           {{ item.marketBase }}
         </view>
       </block>
@@ -16,25 +17,15 @@
 
   <!-- <block wx:for='{{marketBase}}'>
     <view bindtap='showContent' class='baseCurrency' data-index="{{index}}">{{item.marketBase}} </view>
-  </block> -->
-  <block wx:for="{{marketInfo}}" wx:for-item="market">
-
+  </block>
     <view class="{{listShow[0].show ? 'marketBox' : 'hideClass'}}">
-      <text>{{market.market}}</text>
-
-      <view class='lastPrice'>
-        <text class='marketLastPrice'>{{market.last_price}}</text>
-        <text class='financeLastPrice'>≈{{market.last_price}}</text>
-      </view>
-      <view class="percentBox {{ market.change_percent>0 ?'up':'down'}}">
-        <text class="percent">{{market.change_percent}}%</text>
-      </view>
-    </view>
-
+   -->
+  <block wx:for="{{marketInfo}}" wx:for-item="market">
+    <template is="marketBox" data="{{...market}}" />
   </block>
 
 </view>
 
 
-<!-- <view style="background:#eee;" bindtap="showContent"  data-index="{{index}}" >{{item.title}}</view>
-    <view style="background:#ccc;" class="{{item.show ? 'showClass' : 'hideClass'}}">{{item.content}}</view> -->
+<!-- <view style="background:#eee; " bindtap="showContent "  data-index="{{index}} " >{{item.title}}</view>
+    <view style="background:#ccc; " class="{{item.show ? 'showClass' : 'hideClass'}} ">{{item.content}}</view> -->

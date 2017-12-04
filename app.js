@@ -2,7 +2,8 @@ import { DB } from "./db/DB.js";
 const request = require('./utils/request.js')
 const utils = require('./utils/util.js')
 var marketList = new DB();
-// var data=require('./data/data.js')
+var dataObj = require("data/data.js")
+
 
 App({
   request: request,
@@ -18,21 +19,33 @@ App({
     if (!storageData) {
 
       this.getMarketBase();
+      this.getFinance();
 
     }
 
 
   },
+
   getMarketBase: function () {
     var url = this.globalData.exbaseBaseUrl + "/GetExbaseInfo";
     wx.request({
       url: url,
       success: function (res) {
-        var dataObj = require("data/data.js")
         dataObj.marketList.marketBase = res.data.base;
         wx.clearStorageSync();
-        console.log(dataObj);
         wx.setStorageSync('marketList', dataObj.marketList);
+      }
+    })
+  },
+
+  getFinance:function(){
+    var url = "https://op.juhe.cn/onebox/exchange/query?key=ebb4522dcc134fabac4e8b29c77eac47";
+    wx.request({
+      url: url,
+      success:function(res){
+        console.log(res.data.result.list[0][5]/100)
+        dataObj.marketList.finance = res.data.result.list[0][5] /100;
+        wx.setStorageSync('marketList', dataObj.marketList)
       }
     })
   },

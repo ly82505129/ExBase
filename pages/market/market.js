@@ -3,6 +3,7 @@ const num = require('../../utils/num.js');
 var app = getApp();
 var marketList = new DB();
 var market = [];
+var mkList = marketList.getAllMarkList();
 Page({
 
   /**
@@ -14,7 +15,7 @@ Page({
     listShow: [
       { show: true },
     ],
-    marketBaseTab:0
+    marketBaseTab: 0
 
     // marketBase:[]
 
@@ -47,7 +48,7 @@ Page({
 
   onLoad: function (options) {
 
-    var mkList = marketList.getAllMarkList();
+
     // for (var i = 0; i < mkList.marketBase.length;i++){
     //   mkList.marketBase[i].selected=true
     //   console.log('这里打印marketbase' + kList.marketBase[i])
@@ -59,7 +60,7 @@ Page({
         var mlist = {};
         mlist.marketBase = i;
         mlist.selected = true;
-        mlist.mk_id=b;
+        mlist.mk_id = b;
         mkList.marketBase[b] = mlist;
       }
     )
@@ -74,6 +75,8 @@ Page({
     // }
     var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?base=" + mkList.marketBase[0].marketBase;
     this.getMarket(marketUrl);
+
+
     // this.setData({
     //   market: marketList.getAllMarkList().market
     // })
@@ -97,6 +100,7 @@ Page({
   loadMarketData: function (res) {
     // console.log("这里打印markinfo"+marketInfo);
     console.log('这里打印marketinfo的长度' + this.data.marketInfo.length)
+
     // var key = "marketInfo[" + i + "]";
     /*1.修改res中的对象，将change_percent换成百分比并保留两位小叔，
       2.往res中增加对象，将market交易对放入到res中
@@ -104,8 +108,20 @@ Page({
     // var  market=[res];
     // console.log(market.length)
     for (var i in res) {
+      var btcUsdt = res["BTC_USDT"].last_price
+      var ethUsdt = res["ETH_USDT"].last_price
       res[i].change_percent = num.toDecimal(res[i].change_percent);
-      res[i].market = i;
+      res[i].market = i.replace('_', '/');
+
+      var base = i.split("_");
+      if (base[1] === "BTC") {
+        res[i].price_cny = num.toDecimal(res[i].last_price * btcUsdt * mkList.finance)
+      } else if (base[1] === "ETH") {
+        res[i].price_cny = num.toDecimal(res[i].last_price * ethUsdt * mkList.finance)
+      } else {
+        res[i].price_cny = num.toDecimal(res[i].last_price * mkList.finance)
+      }
+      // res[i].price_cny=
     }
     // res.change_percent = num.toDecimal(res.change_percent * 100) + "%";
     // res.market = params.market;
@@ -118,11 +134,6 @@ Page({
     // var length=market.length
     // this.market[length]=res;
     // market.push(res);
-
-
-    console.log("这里是在loadmarketdata里打印的market" + market);
-
-
 
   },
 
