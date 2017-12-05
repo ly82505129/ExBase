@@ -4,6 +4,8 @@ var app = getApp();
 var marketList = new DB();
 var market = [];
 var mkList = marketList.getAllMarkList();
+var timer=null;
+// var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?base=" + mkList.marketBase[0].marketBase;
 Page({
 
   /**
@@ -148,14 +150,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var marketUrl = app.globalData.exbaseBaseUrl + "GetTicker?base=" + mkList.marketBase[0].marketBase;
+    var that=this;
+    timer=setInterval(function(){
+      that.getMarket(marketUrl)
+    },2000)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    clearInterval(timer)
   },
 
   /**
